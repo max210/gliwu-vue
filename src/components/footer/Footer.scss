@@ -1,0 +1,134 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  padding-top: 80px;
+  background-color: #bababa;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  .container {
+    display: flex;
+    .child-container {
+      flex: 1;
+      text-align: center;
+      ul {
+        font-size: 14px;
+        li {
+          margin-top: 5px;
+          color: #666;
+          cursor: pointer;
+          &.bold {
+            font-weight: bold;
+            font-size: 16px;
+            color: #000;
+          }
+          &:hover {
+            color: #000;
+          }
+          .to-link {
+            color: #666;
+            cursor: pointer;
+            &:hover {
+              color: #000;
+            }
+          }
+        }
+      }
+      .img {
+        margin-bottom: 15px;
+        border-bottom: 1px solid #888;
+        img {
+          height: 60px;
+          width: 120px;
+        }
+      }
+      .icons {
+        a {
+          width: 30px;
+          height: 30px;
+          margin-right: 10px;
+          display: inline-block;
+          transition: all .5s;
+          &:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+          }
+          &.icon1 {
+            background-image: url(../../assets/icon1.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+          &.icon2 {
+            background-image: url(../../assets/icon2.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+          &.icon3 {
+            background-image: url(../../assets/icon3.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+          &.icon4 {
+            background-image: url(../../assets/icon4.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  footer {
+    height: 250px;
+    .container {
+      display: block;
+      .present-type {
+        float: left;
+        width: 33.3%;
+      }
+      .contact-us {
+        float: right;
+        width: 33.3%;
+      }
+      .about-us {
+        float: right;
+        width: 33.3%;
+      }
+      .logo-icons {
+        clear: both;
+        position: relative;
+        margin-left: 10px;
+        height: 40px;
+        width: 100%;
+        border-top: 1px solid #888;
+        .img {
+          float: right;
+          border-bottom: none;
+          margin-bottom: 0;
+          img {
+            height: 40px;
+            width: 80px;
+          }
+        }
+        .icons {
+          float: left;
+          position: absolute;
+          bottom: 0;
+          vertical-align: bottom;
+          a {
+            background-size: 80%!important;
+            margin-right: 5px!important;
+          }
+        }
+      }
+    }
+    .copy-right-pc {
+      clear: both;
+      margin-top: 10px;
+    }
+  }
+}

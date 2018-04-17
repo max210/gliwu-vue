@@ -1,0 +1,89 @@
+header {
+  position: relative;
+  padding: 0 15px;
+  height: 60px;
+  background-color: #3d3d3d;
+  .logo {
+    height: 60px;
+    float: left;
+    img {
+      width: 120px;
+      height: 60px;
+    }
+  }
+  .right-container-sign, .right-container-user {
+    float: right;
+    color: #fff;
+  }
+  .right-container-sign {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -14px;
+    .signin-btn, .signup-btn {
+      width: 60px;
+      display: inline-block;
+      padding: 3px;
+      margin: 0 auto;
+      text-align: center;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+      transition: all .5s;
+    }
+    .signin-btn {
+      border: 1px solid #1ecd97;
+      &:hover {
+        border-color: #fff;
+      }
+    }
+    .signup-btn {
+      background: #1ecd97;
+      margin-left: 10px;
+      &:hover {
+        background-color: #22e2a7;
+      }
+    }
+  }
+  .right-container-user {
+    user-select: none;
+    cursor: pointer;
+    span {
+      line-height: 60px;
+    }
+    .my-menu {
+      position: absolute;
+      width: 100px;
+      height: 80px;
+      top: 60px;
+      right: 0;
+      padding: 10px 0;
+      color: #000;
+      background-color: #f1f1f1;
+      border-radius: 3px;
+      z-index: 999;
+      text-align: center;
+      .route-link {
+        color: #000;
+        text-decoration: none;
+      }
+      i {
+        margin-left: 5px;
+        color: #555;
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  header {
+    .logo {
+      position: absolute;
+      top: 50%;
+      margin-top: -20px;
+      img {
+        height: 40px;
+        width: 80px;
+      }
+    }
+  }
+}

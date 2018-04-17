@@ -1,0 +1,109 @@
+.sign-container {
+  .signup, .signin, .result {
+    position: absolute;
+    overflow: hidden;
+    width: 320px;
+    top: 60px;
+    left: 50%;
+    margin-left: -160px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #999;
+    border-radius: 5px;
+    z-index: 999;
+    text-align: center;
+    i.close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #777;
+      &:hover {
+        color: #333;
+      }
+    }
+    p.sign-btn {
+      clear: both;
+      width: 70px;
+      padding: 5px 0;
+      margin: 10px auto;
+      text-align: center;
+      background: #1ecd97;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+      &:hover {
+        background-color: #20dba1;
+      }
+    }
+    .go-sign {
+      display: block;
+      float: right;
+      margin-top: 10px;
+      cursor: pointer;
+      color: #777;
+    }
+    .username, .password {
+      margin-top: 10px;
+      span {
+        float: left;
+      }
+    }
+    button {
+      border-color: #20dba1;
+      border-radius: 3px;
+      padding: 3px 6px;
+      transition: all .5s;
+      &:hover {
+        background-color: #20dba1;
+        cursor: pointer;
+      }
+    }
+  }
+  .signin, .signup {
+    h3 {
+      i {
+        margin-right: 5px;
+        color: #1ecd97;
+      }
+    }
+    .login-info {
+      width: 25%;
+      float: left;
+      margin-left: 5%;
+      span {
+        text-align: left;
+        display: block;
+        margin-top: 24px;
+        line-height: 30px;
+      }
+    }
+    .inputs {
+      box-sizing: border-box;
+      width: 65%;
+      float: left;
+      margin-bottom: 30px;
+      text-align: left;
+      input {
+        width: 100%;
+        height: 30px;
+        margin-top: 20px;
+        border-radius: 3px;
+        border: 1px solid #888;
+      }
+    }
+    .user-info {
+      margin-top: 20px;
+      i {
+        color: #ff4d4d;
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  .sign-container {
+    .signup, .signin, .result {
+      width: 70%;
+      margin-left: -40%;
+    }
+  }
+}
