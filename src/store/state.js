@@ -4,7 +4,7 @@ const state = {
   signinPage: false,
   resultPage: false,
   signupPage: false,
-  userName: false,
+  userName: '',
   msg: ''
 }
 

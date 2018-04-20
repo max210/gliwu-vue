@@ -1,14 +1,19 @@
-import {mapMutations, mapGetters} from 'vuex'
+import { mapMutations, mapGetters } from 'vuex'
+import qs from 'qs'
 
 export default {
+
   data () {
     return {
-      userInfo: '',
+      prompt: '',
+      nameOrEmail: '',
       name: '',
+      email: '',
       pass: '',
       rePass: ''
     }
   },
+
   computed: {
     ...mapGetters([
       'signinPage',
@@ -17,67 +22,78 @@ export default {
     ])
   },
   methods: {
-    closeSign () {
-      this.hideSignin()
-      this.hideSignup()
-      this.userInfo = ''
-    },
-    signin () {
-      this.userInfo = ''
-      if (!this.name || !this.pass) {
-        this.userInfo = '用户名或密码不能为空'
-      } else {
-        let param = {
-          name: this.name,
-          pass: this.pass
+
+    async signin () {
+      this.prompt = ''
+      if (!this.nameOrEmail || !this.pass) {
+        this.prompt = '信息不能为空'
+        return
+      }
+
+      const params = {
+        nameOrEmail: this.nameOrEmail,
+        pass: this.pass
+      }
+      try {
+        const res = await this.axios.get(`${this.globalData.host}/user/signin`, { params })
+        if (res.data.status === 0) {
+          this.hideSignin()
+          this.showUsername(res.data.name)
+        } else {
+          this.prompt = res.data.msg
         }
-        this.$http.get('/v1/users/signin', {params: param}).then(res => {
-          res = res.body
-          if (res.status !== 0) {
-            this.userInfo = res.msg
-          } else {
-            this.hideSignin()
-            this.showUsername()
-          }
-        }, res => {})
+      } catch (e) {
+        console.log(e)
       }
     },
-    signup () {
-      if (!this.name || !this.pass || !this.rePass) {
-        this.userInfo = '用户名或密码不能为空'
+
+    async signup () {
+      if (!this.name || !this.email || !this.pass || !this.rePass) {
+        this.prompt = '用户名或密码不能为空'
       } else if (this.pass !== this.rePass) {
-        this.userInfo = '两次输入的密码不一致'
+        this.prompt = '两次输入的密码不一致'
       } else {
-        this.$http.post('/v1/users/signup', {
+        const params = qs.stringify({
           name: this.name,
+          email: this.email,
           pass: this.pass,
           rePass: this.rePass
         })
-        .then(res => {
-          res = res.body
-          if (res.status !== 0) {
-            this.userInfo = res.msg
-            this.hideResult()
-          } else {
+        try {
+          const res = await this.axios.post(`${this.globalData.host}/user/signup`, params)
+          if (res.data.status === 0) {
             this.hideSignup()
-            this.showResult()
+          } else {
+            this.prompt = res.data.msg
           }
-        }, res => {})
+        } catch (e) {
+          console.log(e)
+        }
       }
     },
+
+    closeSign () {
+      this.hideSignin()
+      this.hideSignup()
+      this.prompt = ''
+    },
+
     hideResult () {
       this.hideResult()
     },
+
     showSignin1 () {
-      this.userInfo = ''
+      this.prompt = ''
       this.hideSignup()
       this.showSignin()
     },
+
     showSignup1 () {
-      this.userInfo = ''
+      this.prompt = ''
       this.hideSignin()
       this.showSignup()
     },
+
     ...mapMutations({
       hideSignin: 'hideSignin',
       showSignin: 'showSignin',
@@ -85,7 +101,7 @@ export default {
       showResult: 'showResult',
       hideSignup: 'hideSignup',
       showSignup: 'showSignup',
-      showUsername: 'showUsername'
+      showUsername: 'showUserName'
     })
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Headervue></Headervue>
     <Transparent></Transparent>
     <Sign></Sign>
     <router-view/>
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import Headervue from '@/components/header/Header.vue'
 import Footervue from '@/components/footer/Footer.vue'
 import Sign from '@/components/sign/Sign.vue'
 import Transparent from '@/components/transparent/Transparent.vue'
@@ -15,6 +17,7 @@ import Transparent from '@/components/transparent/Transparent.vue'
 export default {
   name: 'app',
   components: {
+    Headervue,
     Footervue,
     Sign,
     Transparent

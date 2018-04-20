@@ -43,11 +43,11 @@ export default {
     state.resultPage = false
   },
 
-  showUserName (state) {
-    state.userName = true
+  showUserName (state, name) {
+    state.userName = name
   },
 
-  hdieUserName (state) {
-    state.userName = false
+  hideUserName (state) {
+    state.userName = ''
   }
 }

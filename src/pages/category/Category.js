@@ -1,4 +1,3 @@
-import Headervue from '@/components/header/Header.vue'
 import DetailWindow from '@/components/detailWindow/DetailWindow.vue'
 import ResultWindow from '@/components/result-window/ResultWindow'
 import { mapMutations, mapGetters } from 'vuex'
@@ -35,7 +34,6 @@ export default {
   },
 
   components: {
-    Headervue,
     DetailWindow,
     ResultWindow
   },

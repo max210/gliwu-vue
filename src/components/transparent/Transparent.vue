@@ -8,21 +8,26 @@
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+
   computed: {
     ...mapGetters([
       'signinPage',
       'resultPage',
       'signupPage'
     ]),
+
     showTransparent () {
       return this.signinPage || this.resultPage || this.signupPage
     }
   },
+
   methods: {
+
     hideSign () {
       this.hideSignin()
       this.hideSignup()
     },
+
     ...mapMutations({
       hideSignup: 'hideSignup',
       hideSignin: 'hideSignin'

@@ -1,6 +1,5 @@
-<template lang="html">
+<!-- <template lang="html">
   <div class="goods-detail">
-    <Headervue></Headervue>
 
     <div class="outer-layer" @click="toHideDetailWindow" v-if="detailWindow"></div>
 
@@ -92,4 +91,4 @@
 
 <style scoped lang="scss">
   @import "./Category";
-</style>
+</style> -->

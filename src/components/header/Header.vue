@@ -9,7 +9,7 @@
     </div>
     <div class="right-container-user" v-if="userName" @click="toggleMyMenu">
       <i class="fa fa-user-circle" aria-hidden="true"></i>
-      <!-- <span>{{userName}}</span> -->
+      <span>{{userName}}</span>
       <span v-if="!myMenu"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
       <span v-if="myMenu"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
       <div class="my-menu" v-if="!myMenu">

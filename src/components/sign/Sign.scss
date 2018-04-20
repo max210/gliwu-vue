@@ -1,31 +1,30 @@
 .sign-container {
-  .signup, .signin, .result {
-    position: absolute;
-    overflow: hidden;
-    width: 320px;
-    top: 60px;
-    left: 50%;
-    margin-left: -160px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #999;
-    border-radius: 5px;
-    z-index: 999;
-    text-align: center;
-    i.close {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      color: #777;
-      &:hover {
-        color: #333;
-      }
+  width: 300px;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #999;
+  border-radius: 5px;
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  margin-left: -150px;
+  z-index: 999;
+  .close {
+    float: right;
+    color: #777;
+    &:hover {
+      color: #333;
     }
-    p.sign-btn {
-      clear: both;
+  }
+  .signup, .signin, .result {
+    text-align: center;
+    .fa-exclamation {
+      color: red;
+    }
+    .sign-btn {
       width: 70px;
+      margin: 30px;
       padding: 5px 0;
-      margin: 10px auto;
       text-align: center;
       background: #1ecd97;
       border-radius: 3px;
@@ -33,19 +32,6 @@
       cursor: pointer;
       &:hover {
         background-color: #20dba1;
-      }
-    }
-    .go-sign {
-      display: block;
-      float: right;
-      margin-top: 10px;
-      cursor: pointer;
-      color: #777;
-    }
-    .username, .password {
-      margin-top: 10px;
-      span {
-        float: left;
       }
     }
     button {
@@ -60,50 +46,48 @@
     }
   }
   .signin, .signup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     h3 {
       i {
         margin-right: 5px;
         color: #1ecd97;
       }
     }
-    .login-info {
-      width: 25%;
-      float: left;
-      margin-left: 5%;
-      span {
-        text-align: left;
-        display: block;
-        margin-top: 24px;
-        line-height: 30px;
-      }
-    }
-    .inputs {
-      box-sizing: border-box;
-      width: 65%;
-      float: left;
-      margin-bottom: 30px;
-      text-align: left;
-      input {
-        width: 100%;
-        height: 30px;
-        margin-top: 20px;
-        border-radius: 3px;
-        border: 1px solid #888;
-      }
-    }
-    .user-info {
+    .name-container, .pass-container, .repass-container {
+      width: 100%;
+      height: 50rpx;
       margin-top: 20px;
-      i {
-        color: #ff4d4d;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      span {
+        width: 30%;
+      }
+      input {
+        height: 25px;
+        width: 70%;
+        border-radius: 3px;
+        border: 1px solid #999;
       }
     }
+  }
+  .go-sign {
+    display: block;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    cursor: pointer;
+    color: #777;
   }
 }
 @media screen and (max-width: 767px) {
   .sign-container {
-    .signup, .signin, .result {
-      width: 70%;
-      margin-left: -40%;
-    }
+    box-sizing: border-box;
+    left: 0;
+    margin: 0;
+    width: 100vw;
   }
 }
