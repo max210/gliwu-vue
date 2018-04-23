@@ -1,5 +1,4 @@
 import { mapMutations, mapGetters } from 'vuex'
-import qs from 'qs'
 
 export default {
 
@@ -21,6 +20,7 @@ export default {
       'signupPage'
     ])
   },
+
   methods: {
 
     async signin () {
@@ -53,7 +53,7 @@ export default {
       } else if (this.pass !== this.rePass) {
         this.prompt = '两次输入的密码不一致'
       } else {
-        const params = qs.stringify({
+        const params = this.qs.stringify({
           name: this.name,
           email: this.email,
           pass: this.pass,

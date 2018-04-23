@@ -13,10 +13,9 @@ import qs from 'qs'
 import globalData from '../globalData'
 
 axios.defaults.withCredentials = true  // axios请求携带cookie
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'  // post请求参数
 
-Vue.prototype.qs = qs
 Vue.prototype.globalData = globalData
+Vue.prototype.qs = qs
 
 Vue.config.productionTip = false
 

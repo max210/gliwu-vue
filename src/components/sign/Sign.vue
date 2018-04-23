@@ -34,7 +34,7 @@
       <div class="signin">
         <h3><i class="fa fa-gift"></i>注册</h3>
         <div class="prompt-container" v-if="prompt">
-          <i class="fas fa-exclamation"></i>
+          <i class="fa fa-exclamation"></i>
           <span>{{prompt}}</span>
         </div>
         <div class="name-container">
