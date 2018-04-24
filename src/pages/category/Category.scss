@@ -76,10 +76,11 @@
         height: 50px;
         float: right;
         margin-right: 10px;
-        span {
+        div {
+          display: inline-block;
           margin-left: 20px;
           cursor: pointer;
-          &.currentdefault, &.currentup, &.currentdown {
+          &.current {
             color: #e66e52;
           }
         }

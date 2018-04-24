@@ -1,16 +1,16 @@
 <template lang="html">
   <div class="detail-window">
     <div class="img">
-      <img :src="sProductImg" alt="">
+      <img :src="info.productImg" alt="">
     </div>
     <div class="line"></div>
     <div class="desc">
-      {{sProductDesc}}
+      {{info.productDesc}}
     </div>
     <div class="line"></div>
     <div class="btn">
       <span @click="hideSelf">继续看看</span>
-      <span><a :href="sProductLink" target="_blank">我要去买</a></span>
+      <span><a :href="info.productLink" target="_blank">我要去买</a></span>
     </div>
     <div class="icon">
       <i class="fa fa-heart-o" aria-hidden="true" @click="toHeart"></i>
@@ -19,39 +19,39 @@
 </template>
 
 <script>
-import {mapMutations, mapGetters} from 'vuex'
-import ResultWindow from '@/components/result-window/ResultWindow'
+import { mapMutations, mapGetters } from 'vuex'
 
 export default {
-  props: [
-    's-product-img',
-    's-product-desc',
-    's-id',
-    's-product-link'
-  ],
+
+  props: ['info'],
+
   computed: {
     ...mapGetters([
       'resultWindow'
     ])
   },
-  components: {
-    ResultWindow
-  },
+
   methods: {
+
     hideSelf () {
       this.hideDetailWindow()
     },
-    toHeart () {
-      this.$http.post('/v1/users/like', {
-        productId: this.sId,
-        productImg: this.sProductImg,
-        productLink: this.sProductLink
-      }).then(res => {
-        res = res.body
-        this.inputMsg(res.msg)
+
+    async toHeart (id, img, link) {
+      const params = this.qs.stringify({
+        productId: this.info._id,
+        productImg: this.info.productImg,
+        productLink: this.info.productLink
+      })
+      try {
+        const res = await this.axios.post(`${this.globalData.host}/user/addCollection`, params)
+        this.inputMsg(res.data.msg)
         this.showResultWindow()
-      }, res => {})
+      } catch (e) {
+        console.log(e)
+      }
     },
+
     ...mapMutations({
       hideDetailWindow: 'hideDetailWindow',
       showResultWindow: 'showResultWindow',
