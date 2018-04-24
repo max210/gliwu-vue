@@ -37,7 +37,7 @@ export default {
       this.hideDetailWindow()
     },
 
-    async toHeart (id, img, link) {
+    async toHeart () {
       const params = this.qs.stringify({
         productId: this.info._id,
         productImg: this.info.productImg,

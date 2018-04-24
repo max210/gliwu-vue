@@ -1,7 +1,5 @@
 <template lang="html">
   <div>
-    <Headervue></Headervue>
-
     <div class="my-collection-container">
       <h4>我的收藏</h4>
       <p v-if="!collections.length">呀哈，空空如也，快去收藏吧！</p>
@@ -21,36 +19,42 @@
 </template>
 
 <script>
-import Headervue from '@/components/header/Header.vue'
 
 export default {
+
   data () {
     return {
       collections: ''
     }
   },
-  components: {
-    Headervue
-  },
+
   mounted () {
     this.getCollections()
   },
+
   methods: {
-    getCollections () {
-      this.$http.get('/v1/users/collection').then(res => {
-        res = res.body
-        if (res.status === 0) {
-          this.collections = res.result
+
+    async getCollections () {
+      try {
+        const res = await this.axios.get(`${this.globalData.host}/user/collection`)
+        if (res.data.status === 0) {
+          this.collections = res.data.data
         }
-      }, res => {})
+      } catch (e) {
+        console.log(e)
+      }
     },
-    outHeart (id) {
-      this.$http.post('v1/users/unlike', {productId: id}).then(res => {
-        res = res.body
-        if (res.status === 0) {
+
+    async outHeart (id) {
+      const params = { productId: id }
+      try {
+        const res = await this.axios.get(`${this.globalData.host}/user/removeCollection`, { params })
+        if (res.data.status === 0) {
           this.getCollections()
         }
-      }, res => {})
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
