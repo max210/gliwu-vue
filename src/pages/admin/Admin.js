@@ -1,18 +1,14 @@
 export default {
+
   data () {
     return {
-      adminSignin: false,
-      adminIndex: false,
       btnShow: true,
       initPage: true,
-      showAddNew: false,
+      WindowFlag: false,
+      addNewFlag: true,
       pageSize: 8,
       page: 1,
-      selected: '',
-      adminName: '',
       userInfo: '',
-      name: '',
-      pass: '',
       goods: [],
       productType: '',
       productName: '',
@@ -21,29 +17,47 @@ export default {
       productDesc: ''
     }
   },
+
   mounted () {
     this.getGoodList()
-    this.checkLogin()
   },
-  methods: {
-    signin () {
-      let param = {
-        name: this.name,
-        pass: this.pass
-      }
-      this.$http.get('/v1/admin/signin', {params: param}).then(res => {
-        res = res.body
-        if (res.status === 0) {
-          this.adminSignin = false
-          this.adminIndex = true
-        } else {
-        }
-      }, res => {})
-    },
-    submit () {
-      if (!this.productType || !this.productName || !this.productImg || !this.productPrice || !this.productDesc) {
 
-      } else {
+  computed: {
+    layerShow () {
+      return this.addWindowFlag || this.changeWindowFlag
+    }
+  },
+
+  methods: {
+
+    async getGoodList () {
+      const params = {
+        pageSize: this.pageSize,
+        page: this.page
+      }
+      try {
+        const res = await this.axios.get(`${this.globalData.host}/admin/get-all-goods`, { params })
+        if (res.data.status === 0) {
+          let list = res.data.data
+          // 格式化时间
+          list.forEach(item => {
+            item.created = this.getTime(item.created)
+          })
+
+          if (this.initPage) {
+            this.goods = list
+          } else {
+            this.goods = this.goods.concat(list)
+            if (res.data.data.length === 0) this.btnShow = false
+          }
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
+    async submit () {
+      if (this.productType && this.productName && this.productImg && this.productPrice && this.productDesc) {
         switch (this.productType) {
           case '精选':
             this.productType = 1
@@ -61,82 +75,92 @@ export default {
             this.productType = 5
             break
         }
-        this.$http.post('v1/admin/addnew', {
+        const params = this.qs.stringify({
           productType: this.productType,
           productName: this.productName,
           productImg: this.productImg,
           productPrice: this.productPrice,
           productDesc: this.productDesc
-        }).then(res => {
-          res = res.body
-          if (res.status === 0) {
-            this.productType = ''
-            this.productName = ''
-            this.productImg = ''
-            this.productPrice = ''
-            this.productDesc = ''
-            this.showAddNew = false
-          }
-        }, res => {})
-      }
-    },
-    getGoodList () {
-      let param = {
-        pageSize: this.pageSize,
-        page: this.page
-      }
-      this.$http.get('/v1/goods', {params: param}).then(res => {
-        res = res.body
-        if (res.status === 0) {
-          this.adminName = res.msg
-
-          if (!this.initPage) {
-            this.goods = this.goods.concat(res.result.list)
-            if (res.result.count === 0) {
-              this.btnShow = false
+        })
+        try {
+          // 新增商品
+          if (this.addNewFlag) {
+            const res = await this.axios.post(`${this.globalData.host}/admin/new-good`, params)
+            if (res.data.status === 0) {
+              this.productType = ''
+              this.productName = ''
+              this.productImg = ''
+              this.productPrice = ''
+              this.productDesc = ''
+              this.WindowFlag = false
             }
           } else {
-            this.goods = res.result.list
+            // 更改商品
+            const res = await this.axios.post(`${this.globalData.host}/admin/update-good`, params)
+            if (res.data.status === 0) {
+              this.productType = ''
+              this.productName = ''
+              this.productImg = ''
+              this.productPrice = ''
+              this.productDesc = ''
+              this.WindowFlag = false
+            }
           }
-        } else {
-          this.goods = []
+        } catch (e) {
+          console.log(e)
         }
-      }, res => {
-      })
+      }
     },
+
+    async deleteProduct (productId) {
+      confirm('确定要删除此产品吗？')
+      const params = this.qs.stringify({ productId })
+      try {
+        const res = await this.axios.post(`${this.globalData.host}/admin/delete-good`, params)
+        if (res.data.status === 0) {
+          this.getGoodList()
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    },
+
     loadMore () {
-      this.page ++
+      this.page += 1
       this.initPage = false
       this.getGoodList()
     },
-    checkLogin () {
-      this.$http.get('/v1/admin/checkLogin').then(res => {
-        res = res.body
-        if (res.status === 0) {
-          this.adminName = res.msg
-          this.adminSignin = false
-          this.adminIndex = true
-        } else {
-          this.adminSignin = true
-        }
-      })
+
+    showWindow (flag, item) {
+      if (flag) {
+        this.addNewFlag = true
+        this.WindowFlag = true
+      } else {
+        this.addNewFlag = false
+        this.WindowFlag = true
+
+        this.productType = item.productType
+        this.productName = item.productName
+        this.productImg = item.productImg
+        this.productPrice = item.productPrice
+        this.productDesc = item.productDesc
+      }
     },
-    showAdd () {
-      this.showAddNew = true
+
+    closeWindow () {
+      this.WindowFlag = false
     },
-    closeAdd () {
-      this.showAddNew = false
-    },
-    deleteProduct (id) {
-      confirm('确定要删除此产品吗？')
-      this.$http.post('v1/admin/delete', {
-        productId: id
-      }).then(res => {
-        res = res.body
-        if (res.status === 0) {
-          this.getGoodList()
-        }
-      }, res => {})
+
+    getTime (time) {
+      time = new Date(time)
+      const Y = time.getFullYear()
+      const M = (time.getMonth() + 1) > 10 ? (time.getMonth() + 1) : `0${time.getMonth() + 1}`
+      const D = time.getDate() > 10 ? time.getDate() : `0${time.getDate()}`
+      const H = time.getHours() > 10 ? time.getHours() : `0${time.getHours()}`
+      const MT = time.getMinutes() > 10 ? time.getMinutes() : `0${time.getMinutes()}`
+
+      return (`${Y}.${M}.${D} ${H}:${MT}`)
     }
+
   }
 }

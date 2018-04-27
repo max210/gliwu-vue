@@ -61,7 +61,7 @@ export default {
         productLink: item.productLink
       })
       try {
-        const res = await this.axios.post(`${this.globalData.host}/user/addCollection`, params)
+        const res = await this.axios.post(`${this.globalData.host}/user/add-collection`, params)
         this.inputMsg(res.data.msg)
         this.showResultWindow()
       } catch (e) {

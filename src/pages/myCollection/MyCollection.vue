@@ -48,7 +48,7 @@ export default {
     async outHeart (id) {
       const params = { productId: id }
       try {
-        const res = await this.axios.get(`${this.globalData.host}/user/removeCollection`, { params })
+        const res = await this.axios.get(`${this.globalData.host}/user/remove-collection`, { params })
         if (res.data.status === 0) {
           this.getCollections()
         }
