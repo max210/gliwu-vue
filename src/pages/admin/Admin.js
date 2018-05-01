@@ -10,6 +10,7 @@ export default {
       page: 1,
       userInfo: '',
       goods: [],
+      productId: '',
       productType: '',
       productName: '',
       productImg: '',
@@ -96,6 +97,14 @@ export default {
             }
           } else {
             // 更改商品
+            const params = this.qs.stringify({
+              productId: this.productId,
+              productType: this.productType,
+              productName: this.productName,
+              productImg: this.productImg,
+              productPrice: this.productPrice,
+              productDesc: this.productDesc
+            })
             const res = await this.axios.post(`${this.globalData.host}/admin/update-good`, params)
             if (res.data.status === 0) {
               this.productType = ''
@@ -113,15 +122,18 @@ export default {
     },
 
     async deleteProduct (productId) {
-      confirm('确定要删除此产品吗？')
-      const params = this.qs.stringify({ productId })
-      try {
-        const res = await this.axios.post(`${this.globalData.host}/admin/delete-good`, params)
-        if (res.data.status === 0) {
-          this.getGoodList()
+      const res = confirm('确定要删除此产品吗？')
+      if (res) {
+        const params = this.qs.stringify({ productId })
+        try {
+          const res = await this.axios.post(`${this.globalData.host}/admin/delete-good`, params)
+          if (res.data.status === 0) {
+            this.goods = []
+            this.getGoodList()
+          }
+        } catch (e) {
+          console.log(e)
         }
-      } catch (e) {
-        console.log(e)
       }
     },
 
@@ -139,6 +151,7 @@ export default {
         this.addNewFlag = false
         this.WindowFlag = true
 
+        this.productId = item._id
         this.productType = item.productType
         this.productName = item.productName
         this.productImg = item.productImg

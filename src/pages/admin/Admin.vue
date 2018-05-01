@@ -12,7 +12,7 @@
           </div>
           <div class="btn-time-container">
             <span class="time">更新时间：{{item.created}}</span>
-            <span class="change-btn" @click="showChangeWindow(false, item)">编辑</span>
+            <span class="change-btn" @click="showWindow(false, item)">编辑</span>
             <span class="delete-btn" @click="deleteProduct(item._id)">删除</span>
           </div>
         </div>
@@ -30,7 +30,6 @@
           <div class="product-input">
             <span>商品类型</span>
             <select v-model="productType">
-              <option disabled value="">选择商品类型</option>
               <option>精选</option>
               <option>女生</option>
               <option>男生</option>
