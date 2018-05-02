@@ -63,6 +63,7 @@ export default {
           const res = await this.axios.post(`${this.globalData.host}/user/signup`, params)
           if (res.data.status === 0) {
             this.hideSignup()
+            this.showResultWindow(res.data.msg)
           } else {
             this.prompt = res.data.msg
           }
@@ -101,7 +102,8 @@ export default {
       showResult: 'showResult',
       hideSignup: 'hideSignup',
       showSignup: 'showSignup',
-      showUsername: 'showUserName'
+      showUsername: 'showUserName',
+      showResultWindow: 'showResultWindow'
     })
   }
 }

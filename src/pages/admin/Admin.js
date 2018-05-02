@@ -8,7 +8,6 @@ export default {
       addNewFlag: true,
       pageSize: 8,
       page: 1,
-      userInfo: '',
       goods: [],
       productId: '',
       productType: '',

@@ -19,7 +19,7 @@
       </div>
 
       <div class="btn">
-        <button type="button" name="button" v-show="btnShow" @click="loadMore">加载更多</button>
+        <span class="new-btn load-more" @click="loadMore">加载更多</span>
       </div>
 
       <div class="outer-layer" v-if="WindowFlag"></div>

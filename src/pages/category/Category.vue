@@ -31,8 +31,6 @@
             <span>{{item}}</span>
             <i class="fa fa-long-arrow-up" aria-hidden="true"></i>
           </div>
-          <!-- <span :class="{'current': currentRange === index}" @click="sortGoods(1, 1)">升序<i class="fa fa-long-arrow-up" aria-hidden="true"></i></span>
-          <span :class="{currentdown: currentdown}" @click="sortGoods(-1, 1)">降序<i class="fa fa-long-arrow-down" aria-hidden="true"></i></span> -->
         </div>
 
         <div class="main-container">
@@ -45,7 +43,7 @@
           </div>
 
           <span class="m-filter" v-show="mRangeIcon" @click="showPriceRange"><i class="fa fa-sliders" aria-hidden="true"></i>筛选</span>
-          <div class="transparent" v-show="transparent" @click="hidePriceRange"></div>
+          <div class="transparent" v-show="transparent" @click="hidePriceRange"rr></div>
           <transition name="slide">
             <div class="price-range-m" v-show="!mRangeIcon">
               <i class="fa fa-times" aria-hidden="true" @click="hidePriceRange"></i>
