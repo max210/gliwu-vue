@@ -61,12 +61,12 @@
     </div>
 
     <!-- 注册结果 -->
-    <!-- <div class="sign-container" v-if="resultPage">
+    <div class="sign-container" v-if="resultPage">
       <div class="result">
         <p>我们已向您的邮箱发送一个激活链接，请点击激活链接以激活您的账户</p>
         <button type="button" name="button" @click="hideResult">我知道了</button>
       </div>
-    </div> -->
+    </div>
 
   </div>
 </template>
