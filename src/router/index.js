@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import GoodIndex from '@/pages/index/Index.vue'
-import Category from '@/pages/category/Category.vue'
-import Admin from '@/pages/admin/admin.vue'
-import MyCollection from '@/pages/myCollection/MyCollection'
 import Active from '@/pages/active/Active'
+import Admin from '@/pages/admin/admin.vue'
+import GoodIndex from '@/pages/index/Index.vue'
+import Callback from '@/pages/callback/Callback'
+import Category from '@/pages/category/Category.vue'
+import MyCollection from '@/pages/myCollection/MyCollection'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/my_collecion',
       name: 'MyCollection',
       component: MyCollection
+    },
+    {
+      path: '/callback',
+      name: 'Callback',
+      component: Callback
     }
   ]
 })

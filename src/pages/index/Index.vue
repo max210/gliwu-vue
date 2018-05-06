@@ -5,9 +5,10 @@
 </template>
 
 <script>
-export default {
-}
+import Index from './index'
+export default Index
 </script>
 
 <style lang="scss">
+@import './Index.scss';
 </style>

@@ -82,6 +82,19 @@
     cursor: pointer;
     color: #777;
   }
+  .third-login {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    a {
+      width: 25px;
+      height: 25px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 }
 @media screen and (max-width: 767px) {
   .sign-container {

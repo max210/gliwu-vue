@@ -58,6 +58,12 @@
 
       <span class="go-sign" @click="showSignin1"><u>已有账号，去登录>></u></span>
 
+      <div class="third-login">
+        <a href="https://github.com/login/oauth/authorize?client_id=3e06889acba3ac350514">
+          <img src="../../assets/github-icon.png" alt="GitHub">
+        </a>
+      </div>
+
     </div>
 
     <!-- 注册结果 -->
