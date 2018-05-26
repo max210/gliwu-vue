@@ -11,6 +11,11 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url('http://p3o8h1g6m.bkt.clouddn.com/gift-1420830_1920.jpg');
+    .to-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   }
   .result-window-container {
     width: 400px;
@@ -61,6 +66,7 @@
       box-sizing: border-box;
       padding: 20px;
       text-align: center;
+      overflow: hidden;
     }
     .girl-part {
       .left {

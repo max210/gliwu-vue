@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="index-container">
-    <div class="img"></div>
+    <div class="img"><router-link class="to-link" :to="{name: 'Category', params: {currentMenuIndex: 0, productType: 1} }"></router-link></div>
 
     <transition name="fade">
       <div class="result-window-container" v-if="resultWindow">
