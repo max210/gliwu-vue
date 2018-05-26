@@ -10,10 +10,10 @@ import axios from 'axios'
 import Vueaxios from 'vue-axios'
 import qs from 'qs'
 
-import globalData from '../globalData'
-
 axios.defaults.withCredentials = true  // axios请求携带cookie
 
+let globalData = {}
+globalData.host = 'http://localhost:3000/api'
 Vue.prototype.globalData = globalData
 Vue.prototype.qs = qs
 
