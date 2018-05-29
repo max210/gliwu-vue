@@ -9,6 +9,7 @@ import VueLazyload from 'vue-lazyload'
 import axios from 'axios'
 import Vueaxios from 'vue-axios'
 import qs from 'qs'
+import VueSocketio from 'vue-socket.io'
 
 axios.defaults.withCredentials = true  // axios请求携带cookie
 
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 
 Vue.use(Vueaxios, axios)  // 全局使用axios
 Vue.use(VueLazyload, { loading: 'static/img-loading.gif' })
+Vue.use(VueSocketio, 'http://localhost:3000')
 
 /* eslint-disable no-new */
 new Vue({

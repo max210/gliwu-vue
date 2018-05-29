@@ -39,25 +39,9 @@ export default {
   data () {
     return {
       chatShow: false,
-      messageList: [
-        {
-          self: true,
-          message: 'hello'
-        },
-        {
-          self: false,
-          message: 'hello'
-        },
-        {
-          self: true,
-          message: 'hello'
-        },
-        {
-          self: true,
-          message: 'hello'
-        }
-      ],
-      inputValue: ''
+      messageList: [],
+      inputValue: '',
+      id: ''
     }
   },
   components: {
@@ -78,6 +62,20 @@ export default {
     },
     send () {
       console.log(this.inputValue)
+      const message = {
+        name: this.$store.getters.userName,
+        content: this.inputValue
+      }
+      this.$socket.emit('newMessage', message)
+    }
+  },
+  sockets: {
+    connect () {
+      console.log('socket connected')
+      this.id = this.$socket.id
+    },
+    receiveMessage (val) {
+      console.log(val)
     }
   }
 }
